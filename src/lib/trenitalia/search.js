@@ -7,10 +7,10 @@ import { invariant, log } from '../utils'
 import * as scraper from './scraper'
 
 
-export async function search({ arrivalStation, departureStation, departureDate }: {
-  arrivalStation: string,
-  departureStation: string,
-  departureDate: string,
+export async function search({ from: arrivalStation, to: departureStation, date: departureDate }: {
+  from: string,
+  to:   string,
+  date: string,
 }) {
   log('Search parameters: ', arguments[0])
   const urlStr = 'https://www.lefrecce.it/B2CWeb/searchExternal.do?parameter=initBaseSearch&lang=it'
