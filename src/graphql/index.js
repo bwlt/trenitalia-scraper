@@ -1,26 +1,25 @@
 // @flow
 
 import graphqlHTTP from 'express-graphql'
-import { buildSchema } from 'graphql'
+import { GraphQLSchema } from 'graphql'
+
+import * as trenitalia from '../lib/trenitalia'
+import query from './query'
+import formatError from './format-error'
 
 
-// Construct a schema, using GraphQL schema language
-const schema = buildSchema(`
-  type Query {
-    hello: String
-  }
-`)
+const context = { trenitalia }
 
-// The root provides a resolver function for each API endpoint
-const root = {
-  hello: () => {
-    return 'Hello world!'
-  },
-}
+export type Ctx = typeof context
+
+const schema = new GraphQLSchema({
+  query
+})
 
 
 export default graphqlHTTP({
-  schema: schema,
-  rootValue: root,
+  schema,
   graphiql: true,
+  context,
+  formatError,
 })

@@ -1,9 +1,10 @@
 {
   "name": "trenitalia",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "src",
   "scripts": {
+    "build": "babel --out-dir build/ --copy-files src",
     "dev": "nodemon bin/server.js",
     "lint": "eslint .",
     "start": "node bin/server.js",
@@ -14,26 +15,29 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
-    "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-env": "^1.5.2",
     "babel-register": "^6.24.1",
     "eslint": "^3.19.0",
+    "eslint-plugin-flowtype": "^2.34.0",
     "flow-bin": "^0.47.0",
     "jest": "^20.0.4",
     "nodemon": "^1.11.0"
   },
   "dependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-env": "^1.5.2",
     "body-parser": "^1.17.2",
     "cheerio": "^1.0.0-rc.1",
+    "debug": "^2.6.8",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
     "express-graphql": "^0.6.6",
     "graphql": "^0.10.3",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
-    "node-fetch": "^1.7.1"
+    "node-fetch": "^1.7.1",
+    "remove": "^0.1.5"
   }
 }

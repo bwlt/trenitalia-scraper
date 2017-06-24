@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000
 
 
 if (process.env.NODE_ENV === 'production') {
-  throw new Error('unimplemented')
+  app = require('../build').default
 }
 else {
   require('babel-register')
