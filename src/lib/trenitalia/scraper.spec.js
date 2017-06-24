@@ -16,10 +16,10 @@ describe(`${__filename}`, () => {
     const solutions = scraper.scrapeSolutions(htmlStr)
 
     expect(solutions[0]).toEqual({
-      departureTime: '06:45',
-      departureStation: 'Milano Centrale',
-      arrivalTime: '10:06',
-      arrivalStation: 'Pordenone',
+      fromTime: '06:45',
+      from: 'Milano Centrale',
+      toTime: '10:06',
+      to: 'Pordenone',
       duration: '3h 21\'',
       trains: [
         'Frecciarossa 9703'
@@ -27,10 +27,10 @@ describe(`${__filename}`, () => {
       price: '39,90 €'
     })
     expect(solutions[1]).toEqual({
-      departureTime: '07:45',
-      departureStation: 'Milano Centrale',
-      arrivalTime: '11:15',
-      arrivalStation: 'Pordenone',
+      fromTime: '07:45',
+      from: 'Milano Centrale',
+      toTime: '11:15',
+      to: 'Pordenone',
       duration: '3h 30\'',
       trains: [
         'Frecciarossa 9707',
