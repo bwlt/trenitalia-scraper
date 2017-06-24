@@ -11,17 +11,17 @@ const FORMAT = 'DD-MM-YYYY'
 
 
 function dateValue(value: mixed): ?moment {
-  if (typeof value !== 'string') return null
+  if (typeof value !== 'string') return undefined
   const m = moment(value, FORMAT)
   if (m.isValid()) return m
-  else return null
+  else return undefined
 }
 
 
 const DateType = new GraphQLScalarType({
   name: 'Date',
-  parseValue() {
-    throw new Error('Unimplemented')
+  parseValue(value) {
+    return dateValue(value)
   },
   parseLiteral(ast) {
     if (ast.kind === Kind.STRING) {
