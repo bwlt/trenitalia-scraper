@@ -39,6 +39,7 @@
     "graphql": "^0.10.3",
     "lodash": "^4.17.4",
     "micro": "^7.3.3",
+    "micro-cors": "^0.0.4",
     "moment": "^2.18.1",
     "node-fetch": "^1.7.1",
     "remove": "^0.1.5"
