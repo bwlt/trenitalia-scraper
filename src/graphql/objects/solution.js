@@ -7,7 +7,12 @@ import {
   GraphQLString,
 } from 'graphql'
 
-import { StationType } from '../scalars'
+import {
+  DateTimeType,
+  DurationType,
+  PriceType,
+  StationType,
+} from '../scalars'
 
 
 export default new GraphQLObjectType({
@@ -15,10 +20,10 @@ export default new GraphQLObjectType({
   fields: {
     from:     { type: new GraphQLNonNull(StationType) },
     to:       { type: new GraphQLNonNull(StationType) },
-    fromTime: { type: new GraphQLNonNull(GraphQLString) },
-    toTime:   { type: new GraphQLNonNull(GraphQLString) },
-    duration: { type: new GraphQLNonNull(GraphQLString) },
-    price:    { type: new GraphQLNonNull(GraphQLString) },
+    fromTime: { type: new GraphQLNonNull(DateTimeType) },
+    toTime:   { type: new GraphQLNonNull(DateTimeType) },
+    duration: { type: new GraphQLNonNull(DurationType) },
+    price:    { type: new GraphQLNonNull(PriceType) },
     trains:   { type: new GraphQLList(new GraphQLNonNull(GraphQLString)) },
   }
 })
