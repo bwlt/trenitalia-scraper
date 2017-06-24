@@ -1,9 +1,9 @@
 declare type SolutionObject = {|
   from:     string,
   to:       string,
-  fromTime: moment,
-  toTime:   moment,
-  duration: moment.duration,
+  fromTime: moment$Moment,
+  toTime:   moment$Moment,
+  duration: moment$MomentDuration,
   price:    string,
   trains:   string[],
 |}
