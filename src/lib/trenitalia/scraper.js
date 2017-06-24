@@ -5,17 +5,6 @@ import cheerio from 'cheerio'
 import { ScrapeError } from './errors'
 
 
-export type Solution = {|
-  departureTime:    string,
-  departureStation: string,
-  arrivalTime:      string,
-  arrivalStation:   string,
-  duration:         string,
-  price:            string,
-  trains:           string[],
-|}
-
-
 type SelectorType = string | Selection | Node
 
 
@@ -49,10 +38,10 @@ const createSelector = (htmlStr: string) => {
 }
 
 
-export function scrapeSolutions(htmlStr: string): Solution[] {
+export function scrapeSolutions(htmlStr: string): SolutionObject[] {
   const $ = createSelector(htmlStr)
 
-  const solutions: Solution[] = []
+  const solutions: SolutionObject[] = []
 
   const $solutionRow = $('.solutionRow')
   if ($solutionRow.length === 0) throw new ScrapeError(`'.solutionRow' HTML Elements not found`)
@@ -64,18 +53,18 @@ export function scrapeSolutions(htmlStr: string): Solution[] {
     if ($tableCells.length !== 6) throw new ScrapeError(`Expected to find 6 columns in a '.solutionRow'`)
 
     const $firstCell = $($tableCells.get(0))
-    const departureTime = $firstCell.find('.time').text().trim()
-    if (!departureTime) throw new ScrapeError('Departure time not found')
+    const fromTime = $firstCell.find('.time').text().trim()
+    if (!fromTime) throw new ScrapeError('Departure time not found')
 
-    const departureStation = $firstCell.find('.station').text().trim()
-    if (!departureStation) throw new ScrapeError('Departure station not found')
+    const from = $firstCell.find('.station').text().trim()
+    if (!from) throw new ScrapeError('Departure station not found')
 
     const $thirdCell = $($tableCells.get(2))
-    const arrivalTime = $thirdCell.find('.time').text().trim()
-    if (!arrivalTime) throw new ScrapeError('Arrival time not found')
+    const toTime = $thirdCell.find('.time').text().trim()
+    if (!toTime) throw new ScrapeError('Arrival time not found')
 
-    const arrivalStation = $thirdCell.find('.station').text().trim()
-    if (!arrivalStation) throw new ScrapeError('Arrival station not found')
+    const to = $thirdCell.find('.station').text().trim()
+    if (!to) throw new ScrapeError('Arrival station not found')
 
     const $fourthCell = $($tableCells.get(3))
     const duration = $fourthCell.find('.duration').text().trim()
@@ -85,7 +74,7 @@ export function scrapeSolutions(htmlStr: string): Solution[] {
 
     const $trainOffers = $fifthCell.find('.trainOffer')
     if ($trainOffers.length === 0) throw new Error(`'.trainOffer' HTML Elements not found`)
-    const trains: $PropertyType<Solution, 'trains'> = []
+    const trains: $PropertyType<SolutionObject, 'trains'> = []
     $trainOffers.each((index, node) => {
       const $node = $(node)
       const descrNode = $node.find('.descr').get(0)
@@ -103,10 +92,10 @@ export function scrapeSolutions(htmlStr: string): Solution[] {
     if (!price) throw new ScrapeError('Price not found')
 
     solutions.push({
-      departureTime,
-      departureStation,
-      arrivalTime,
-      arrivalStation,
+      fromTime,
+      from,
+      toTime,
+      to,
       duration,
       price,
       trains,

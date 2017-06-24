@@ -6,6 +6,7 @@ import {
 } from 'graphql'
 
 import list from '../../lib/trenitalia/stations-list.json'
+import { invariant } from '../../utils'
 
 
 const DateType = new GraphQLScalarType({
@@ -23,8 +24,9 @@ const DateType = new GraphQLScalarType({
       return null
     }
   },
-  serialize() {
-    throw new Error('Unimplemented')
+  serialize(value) {
+    invariant(typeof value === 'string', 'Expected to serialize a Station string value')
+    return value
   }
 })
 

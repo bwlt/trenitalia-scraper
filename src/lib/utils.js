@@ -16,8 +16,3 @@ export function times(n: number) {
 export function invariant(condition: mixed, message: string) {
   if (!condition) throw new Error(message)
 }
-
-
-export function log(...args: any) {
-  console.log(...args) // eslint-disable-line no-console
-}

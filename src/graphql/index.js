@@ -4,8 +4,8 @@ import graphqlHTTP from 'express-graphql'
 import { GraphQLSchema } from 'graphql'
 
 import * as trenitalia from '../lib/trenitalia'
-import './scalars'
 import query from './query'
+import formatError from './format-error'
 
 
 const context = { trenitalia }
@@ -21,4 +21,5 @@ export default graphqlHTTP({
   schema,
   graphiql: true,
   context,
+  formatError,
 })

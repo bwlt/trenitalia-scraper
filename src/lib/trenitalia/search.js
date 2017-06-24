@@ -2,22 +2,27 @@
 
 import fetch from 'node-fetch'
 import querystring from 'querystring'
+import createDebug from 'debug'; const debug = createDebug('app:lib:trenitalia')
+import moment from 'moment'
 
-import { invariant, log } from '../utils'
+import { invariant } from '../utils'
 import * as scraper from './scraper'
 
 
-export async function search({ from: arrivalStation, to: departureStation, date: departureDate }: {
+const DATE_FORMAT = 'DD-MM-YYYY'
+
+
+export async function search({ from, to, date }: {
   from: string,
   to:   string,
-  date: string,
-}) {
-  log('Search parameters: ', arguments[0])
+  date: moment,
+}): Promise<SolutionObject[]> {
+  debug('Search parameters: ', arguments[0])
   const urlStr = 'https://www.lefrecce.it/B2CWeb/searchExternal.do?parameter=initBaseSearch&lang=it'
   const body = querystring.stringify({
-    arrivalStation,
-    departureDate,
-    departureStation,
+    arrivalStation: from,
+    departureStation: to,
+    departureDate: date.format(DATE_FORMAT),
     departureTime: '00',
     isRoundTrip: 'false',
     noOfAdults: '1',
@@ -34,7 +39,7 @@ export async function search({ from: arrivalStation, to: departureStation, date:
     'Content-Length': body.length,
   }
 
-  log(`first call: POST ${urlStr}`)
+  debug(`first call: POST ${urlStr}`)
   const firstResponse = await fetch(urlStr, {
     method: 'POST',
     headers,
@@ -48,8 +53,8 @@ export async function search({ from: arrivalStation, to: departureStation, date:
     return acc.concat([firstPart])
   }, []).join('; ')
   const location = firstResponse.headers.get('location')
-  log(`Got cookie: ${cookie}`)
-  log(`Got location: ${location}`)
+  debug(`Got cookie: ${cookie}`)
+  debug(`Got location: ${location}`)
 
   const secondResponse = await fetch(location, {
     headers: {
