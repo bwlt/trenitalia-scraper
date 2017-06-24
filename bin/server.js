@@ -1,11 +1,12 @@
 require('dotenv').load()
 
+const { NODE_ENV } = process.env,
+      isProduction = NODE_ENV === 'production'
 
 let app
-const port = process.env.PORT || 3000
 
 
-if (process.env.NODE_ENV === 'production') {
+if (isProduction) {
   app = require('../build').default
 }
 else {
@@ -14,6 +15,4 @@ else {
 }
 
 
-app.listen(port, () => {
-  console.log(`🌍 Server started on: http://localhost:${port}`) // eslint-disable-line no-console
-})
+module.exports = app
