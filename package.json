@@ -5,9 +5,10 @@
   "main": "src",
   "scripts": {
     "build": "babel --out-dir build/ --copy-files src",
-    "dev": "nodemon bin/server.js",
+    "clean": "rimraf build/ coverage/",
+    "dev": "nodemon --exec \"micro\" bin/server.js",
     "lint": "eslint .",
-    "start": "node bin/server.js",
+    "start": "micro bin/server.js --port ${PORT:-3000}",
     "test": "jest",
     "test:watch": "yarn run test -- --watch"
   },
@@ -19,9 +20,11 @@
     "babel-register": "^6.24.1",
     "eslint": "^3.19.0",
     "eslint-plugin-flowtype": "^2.34.0",
+    "express": "^4.15.3",
     "flow-bin": "^0.47.0",
     "jest": "^20.0.4",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "rimraf": "^2.6.1"
   },
   "dependencies": {
     "babel-cli": "^6.24.1",
@@ -32,10 +35,10 @@
     "cheerio": "^1.0.0-rc.1",
     "debug": "^2.6.8",
     "dotenv": "^4.0.0",
-    "express": "^4.15.3",
     "express-graphql": "^0.6.6",
     "graphql": "^0.10.3",
     "lodash": "^4.17.4",
+    "micro": "^7.3.3",
     "moment": "^2.18.1",
     "node-fetch": "^1.7.1",
     "remove": "^0.1.5"
