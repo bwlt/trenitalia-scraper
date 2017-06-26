@@ -1,18 +1,15 @@
 // @flow
 
-
 export function times(n: number) {
-  const arr: number[] = []
+  const arr: number[] = [];
 
   for (let i = 0; i < n; i++) {
-    arr.push(i)
+    arr.push(i);
   }
 
-  return arr
+  return arr;
 }
 
-
-
 export function invariant(condition: mixed, message: string) {
-  if (!condition) throw new Error(message)
+  if (!condition) throw new Error(message);
 }

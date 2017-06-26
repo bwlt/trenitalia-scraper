@@ -3,18 +3,15 @@
   "version": "0.0.1",
   "description": "",
   "main": "src",
-  "scripts": {
-    "build": "babel --out-dir build/ --copy-files src",
-    "clean": "rimraf build/ coverage/",
-    "dev": "nodemon --exec \"micro\" bin/server.js",
-    "lint": "eslint .",
-    "start": "micro bin/server.js --port ${PORT:-3000}",
-    "test": "jest",
-    "test:watch": "yarn run test -- --watch"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
+  },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "babel-register": "^6.24.1",
@@ -22,8 +19,11 @@
     "eslint-plugin-flowtype": "^2.34.0",
     "express": "^4.15.3",
     "flow-bin": "^0.47.0",
+    "husky": "^0.14.1",
     "jest": "^20.0.4",
+    "lint-staged": "^4.0.0",
     "nodemon": "^1.11.0",
+    "prettier": "^1.4.4",
     "rimraf": "^2.6.1"
   },
   "dependencies": {
@@ -43,5 +43,15 @@
     "moment": "^2.18.1",
     "node-fetch": "^1.7.1",
     "remove": "^0.1.5"
+  },
+  "scripts": {
+    "build": "babel --out-dir build/ --copy-files src",
+    "clean": "rimraf build/ coverage/",
+    "precommit": "lint-staged",
+    "dev": "nodemon --exec \"micro\" bin/server.js",
+    "lint": "eslint .",
+    "start": "micro bin/server.js --port ${PORT:-3000}",
+    "test": "jest",
+    "test:watch": "yarn run test -- --watch"
   }
 }

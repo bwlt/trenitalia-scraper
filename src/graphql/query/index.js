@@ -1,13 +1,12 @@
 // @flow
 
-import { GraphQLObjectType } from 'graphql'
+import { GraphQLObjectType } from "graphql";
 
-import solutions from './solutions'
-
+import solutions from "./solutions";
 
 export default new GraphQLObjectType({
-  name: 'Query',
+  name: "Query",
   fields: {
     solutions
   }
-})
+});

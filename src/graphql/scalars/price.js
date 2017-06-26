@@ -1,26 +1,24 @@
 // @flow
 
-import { GraphQLScalarType } from 'graphql'
-
+import { GraphQLScalarType } from "graphql";
 
 const PriceType = new GraphQLScalarType({
-  name: 'Price',
+  name: "Price",
   parseValue() {
-    throw new Error('Unimplemented')
+    throw new Error("Unimplemented");
   },
   parseLiteral() {
-    throw new Error('Unimplemented')
+    throw new Error("Unimplemented");
   },
   serialize(value: mixed) {
-    if (typeof value !== 'string') throw new Error('Serialize error')
+    if (typeof value !== "string") throw new Error("Serialize error");
     const regex = /(\d+),(\d{2})\s€/,
-          matches = value.match(regex)
-    if (!matches) throw new Error('Serialize error')
+      matches = value.match(regex);
+    if (!matches) throw new Error("Serialize error");
     const amount = Number.parseInt(`${matches[1]}${matches[2]}`),
-          currency = 'EUR'
-    return { amount, currency }
+      currency = "EUR";
+    return { amount, currency };
   }
-})
+});
 
-
-export default PriceType
+export default PriceType;

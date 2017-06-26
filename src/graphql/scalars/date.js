@@ -1,40 +1,32 @@
 // @flow
 
-import {
-  GraphQLScalarType,
-  Kind,
-} from 'graphql'
-import moment from 'moment'
+import { GraphQLScalarType, Kind } from "graphql";
+import moment from "moment";
 
-
-const FORMAT = 'DD-MM-YYYY'
-
+const FORMAT = "DD-MM-YYYY";
 
 function dateValue(value: mixed): ?moment {
-  if (typeof value !== 'string') return undefined
-  const m = moment(value, FORMAT)
-  if (m.isValid()) return m
-  else return undefined
+  if (typeof value !== "string") return undefined;
+  const m = moment(value, FORMAT);
+  if (m.isValid()) return m;
+  else return undefined;
 }
 
-
 const DateType = new GraphQLScalarType({
-  name: 'Date',
+  name: "Date",
   parseValue(value) {
-    return dateValue(value)
+    return dateValue(value);
   },
   parseLiteral(ast) {
     if (ast.kind === Kind.STRING) {
-      return dateValue(ast.value)
-    }
-    else {
-      return null
+      return dateValue(ast.value);
+    } else {
+      return null;
     }
   },
   serialize() {
-    throw new Error('Unimplemented')
+    throw new Error("Unimplemented");
   }
-})
+});
 
-
-export default DateType
+export default DateType;

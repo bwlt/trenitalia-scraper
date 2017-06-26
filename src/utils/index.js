@@ -1,3 +1,3 @@
 // @flow
 
-export { invariant } from './invariant'
+export { invariant } from "./invariant";

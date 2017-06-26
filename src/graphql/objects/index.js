@@ -1,7 +1,5 @@
 // @flow
 
-import SolutionType from './solution'
+import SolutionType from "./solution";
 
-export {
-  SolutionType
-}
+export { SolutionType };
