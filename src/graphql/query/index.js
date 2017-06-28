@@ -1,12 +1,13 @@
 // @flow
 
-import { GraphQLObjectType } from "graphql";
-
-import solutions from "./solutions";
+import { GraphQLObjectType, GraphQLString } from "graphql";
 
 export default new GraphQLObjectType({
   name: "Query",
   fields: {
-    solutions
+    greet: {
+      type: GraphQLString,
+      resolve: () => null
+    }
   }
 });

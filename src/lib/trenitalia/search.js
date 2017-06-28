@@ -52,7 +52,10 @@ export async function search({
     redirect: "manual",
     body
   });
-  invariant(firstResponse.status === 302, "Expected a redirect");
+  invariant(
+    firstResponse.status === 302,
+    `Expected a redirect, but got status: '${firstResponse.status}'`
+  );
 
   const cookie = firstResponse.headers
     .getAll("set-cookie")
