@@ -7,3 +7,8 @@ declare type SolutionObject = {|
   price: string,
   trains: string[]
 |};
+
+declare type StationObject = {|
+  id: string,
+  name: string
+|};

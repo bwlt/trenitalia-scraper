@@ -87,13 +87,15 @@ export function scrapeSolutions(htmlStr: string): SolutionObject[] {
   // Get the date of the actual search
   // It is used to construct the solution fromTime & toTime because they are
   // expressed as time only
-  const $fromDate = $("#returnDate");
+  const $fromDate = $('[name="departureDate"]');
   if ($fromDate.length !== 1)
-    throw new ScrapeError(`Expecting to find one '#returnDate' element`);
+    throw new ScrapeError(
+      `Expecting to find one '[name="departureDate"]' element`
+    );
   const fromDateStr = $fromDate.attr("value");
   if (!fromDateStr)
     throw new ScrapeError(
-      `Attribute 'value' not found o '#returnDate' element`
+      `Attribute 'value' not found o '[name="departureDate"]' element`
     );
   const fromDate = moment(fromDateStr.trim(), DATE_FORMAT);
 
