@@ -14,6 +14,8 @@ function getStationFromValue(value: mixed): ?string {
 
 const DateType = new GraphQLScalarType({
   name: "Station",
+  description:
+    "A string value that represent a station. Use the `stations` query to get a list of valid values.",
   parseValue(value) {
     const station = getStationFromValue(value);
     if (station) return value;

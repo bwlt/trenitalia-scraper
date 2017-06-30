@@ -1,4 +1,4 @@
 // @flow
 
 export { default as getStations } from "./get-stations";
-export { search } from "./search";
+export { default as search } from "./search";

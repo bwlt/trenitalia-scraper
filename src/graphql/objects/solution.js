@@ -1,23 +1,39 @@
 // @flow
 
 import {
+  GraphQLBoolean,
+  GraphQLFloat,
+  GraphQLID,
+  GraphQLInt,
   GraphQLList,
   GraphQLNonNull,
   GraphQLObjectType,
   GraphQLString
 } from "graphql";
 
-import { DateTimeType, DurationType, PriceType, StationType } from "../scalars";
+import { StationType } from "../scalars";
+import TrainType from "./train";
 
 export default new GraphQLObjectType({
   name: "Solution",
   fields: {
-    from: { type: new GraphQLNonNull(StationType) },
-    to: { type: new GraphQLNonNull(StationType) },
-    fromTime: { type: new GraphQLNonNull(DateTimeType) },
-    toTime: { type: new GraphQLNonNull(DateTimeType) },
-    duration: { type: new GraphQLNonNull(DurationType) },
-    price: { type: new GraphQLNonNull(PriceType) },
-    trains: { type: new GraphQLList(new GraphQLNonNull(GraphQLString)) }
+    idsolution: { type: new GraphQLNonNull(GraphQLID) },
+    origin: { type: new GraphQLNonNull(StationType) },
+    destination: { type: new GraphQLNonNull(StationType) },
+    direction: { type: new GraphQLNonNull(GraphQLString) },
+    departuretime: { type: new GraphQLNonNull(GraphQLString) },
+    arrivaltime: { type: new GraphQLNonNull(GraphQLString) },
+    minprice: { type: new GraphQLNonNull(GraphQLFloat) },
+    // optionaltext: null,
+    duration: { type: new GraphQLNonNull(GraphQLString) },
+    changesno: { type: new GraphQLNonNull(GraphQLInt) },
+    trainlist: {
+      type: new GraphQLNonNull(new GraphQLList(new GraphQLNonNull(TrainType)))
+    },
+    bookable: { type: new GraphQLNonNull(GraphQLBoolean) },
+    saleable: { type: new GraphQLNonNull(GraphQLBoolean) },
+    onlycustom: { type: new GraphQLNonNull(GraphQLBoolean) },
+    // extraInfo: [],
+    showSeat: { type: new GraphQLNonNull(GraphQLBoolean) }
   }
 });

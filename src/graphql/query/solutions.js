@@ -1,30 +1,41 @@
 // @flow
 
-import { GraphQLList, GraphQLNonNull } from "graphql";
+import { GraphQLInt, GraphQLList, GraphQLNonNull } from "graphql";
 import moment from "moment";
 
 import { SolutionType } from "../objects";
-import { DateType, StationType } from "../scalars";
+import { DateType, StationType, TimeHourType } from "../scalars";
 import type { Ctx } from "../index";
 
 type Args = {
-  from: string,
-  to: string,
-  date: moment
+  origin: string,
+  destination: string,
+  date: moment,
+  time: moment,
+  limit?: ?number,
+  offset?: ?number
 };
 
 export default {
   type: new GraphQLNonNull(new GraphQLList(new GraphQLNonNull(SolutionType))),
+  description: "Search travel solutions",
   args: {
-    from: { type: new GraphQLNonNull(StationType) },
-    to: { type: new GraphQLNonNull(StationType) },
-    date: { type: new GraphQLNonNull(DateType) }
+    origin: { type: new GraphQLNonNull(StationType) },
+    destination: { type: new GraphQLNonNull(StationType) },
+    date: { type: new GraphQLNonNull(DateType) },
+    time: { type: new GraphQLNonNull(TimeHourType) },
+    limit: { type: GraphQLInt },
+    offset: { type: GraphQLInt }
   },
   resolve(source: mixed, args: Args, ctx: Ctx): Promise<SolutionObject[]> {
-    return ctx.trenitalia.search({
-      from: args.from,
-      to: args.to,
-      date: args.date
-    });
+    const parameters = {};
+    parameters.origin = args.origin;
+    parameters.destination = args.destination;
+    parameters.time = args.time;
+    parameters.date = args.date;
+    if (args.limit) parameters.limit = args.limit;
+    if (args.offset) parameters.offset = args.offset;
+
+    return ctx.trenitalia.search(parameters);
   }
 };

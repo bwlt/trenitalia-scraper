@@ -1,83 +1,54 @@
 // @flow
 
-import fetch from "node-fetch";
+const BASE_URL = "https://www.lefrecce.it";
+
 import querystring from "querystring";
-import createDebug from "debug";
-const debug = createDebug("app:lib:trenitalia");
 import moment from "moment";
+import fetch from "node-fetch";
 
-import { invariant } from "../utils";
-import * as scraper from "./scraper";
+import invariant from "../../utils/invariant";
 
-const DATE_FORMAT = "DD-MM-YYYY";
-
-export async function search({
-  from,
-  to,
-  date
+export default async ({
+  origin,
+  destination,
+  date,
+  time,
+  limit,
+  offset
 }: {
-  from: string,
-  to: string,
-  date: moment
-}): Promise<SolutionObject[]> {
-  debug("Search parameters: ", arguments[0]);
-  const urlStr =
-    "https://www.lefrecce.it/B2CWeb/searchExternal.do?parameter=initBaseSearch&lang=it";
-  const body = querystring.stringify({
-    arrivalStation: from,
-    departureStation: to,
-    departureDate: date.format(DATE_FORMAT),
-    departureTime: "00",
-    isRoundTrip: "false",
-    noOfAdults: "1",
-    noOfChildren: "0",
-    selectedTrainClassification: "",
-    selectedTrainType: "tutti",
-    tripType: "on",
-    url_desktop:
-      "https://www.lefrecce.it/B2CWeb/searchExternal.do?parameter=initBaseSearch&lang=it",
-    url_mobile:
-      "https://www.lefrecce.it/msite/SearchExternal.do?parameter=initBaseSearch&lang=it",
-    ynFlexibleDates: ""
-  });
-  const headers = {
-    "Content-Type": "application/x-www-form-urlencoded",
-    "Content-Length": body.length
-  };
+  origin: string,
+  destination: string,
+  date: moment,
+  time: moment,
+  limit?: number,
+  offset?: number
+}) => {
+  const queryObj = {};
+  queryObj.origin = origin.toUpperCase();
+  queryObj.destination = destination.toUpperCase();
+  queryObj.arflag = "A";
+  queryObj.atime = time.format("HH");
+  queryObj.adultno = 1;
+  queryObj.childno = 0;
+  queryObj.direction = "A";
+  queryObj.frecce = false;
+  queryObj.onlyRegional = false;
+  if (limit) queryObj.limit = limit;
+  if (offset) queryObj.offset = offset;
+  let queryStr = "";
+  queryStr += querystring.stringify(queryObj);
+  // Trenitalia does not encode slash inside date
+  queryStr += `&adate=${date.format("DD/MM/YYYY")}`;
 
-  debug(`first call: POST ${urlStr}`);
-  const firstResponse = await fetch(urlStr, {
-    method: "POST",
-    headers,
-    redirect: "manual",
-    body
-  });
+  const urlStr = `${BASE_URL}/msite/api/solutions?${queryStr}`;
+  const response = await fetch(urlStr);
   invariant(
-    firstResponse.status === 302,
-    `Expected a redirect, but got status: '${firstResponse.status}'`
+    response.status === 200,
+    `Response status must be 200; got ${response.status}`
   );
-
-  const cookie = firstResponse.headers
-    .getAll("set-cookie")
-    .reduce((acc, cookie) => {
-      const firstPart = cookie.split("; ")[0];
-      return acc.concat([firstPart]);
-    }, [])
-    .join("; ");
-  const location = firstResponse.headers.get("location");
-  debug(`Got cookie: ${cookie}`);
-  debug(`Got location: ${location}`);
-
-  const secondResponse = await fetch(location, {
-    headers: {
-      Cookie: cookie
-    }
-  });
-
-  invariant(secondResponse.status === 200, "Expecsted a 200");
-
-  const responsePage = await secondResponse.text();
-  const solutions = scraper.scrapeSolutions(responsePage);
-
-  return solutions;
-}
+  invariant(
+    response.headers.get("content-type") === "application/json",
+    `Response content type must be set to 'application/json'`
+  );
+  return await response.json();
+};
