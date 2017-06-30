@@ -11,7 +11,7 @@ import {
   GraphQLString
 } from "graphql";
 
-import { StationType } from "../scalars";
+import { DateTimeType, DurationType, StationType } from "../scalars";
 import TrainType from "./train";
 
 export default new GraphQLObjectType({
@@ -21,11 +21,11 @@ export default new GraphQLObjectType({
     origin: { type: new GraphQLNonNull(StationType) },
     destination: { type: new GraphQLNonNull(StationType) },
     direction: { type: new GraphQLNonNull(GraphQLString) },
-    departuretime: { type: new GraphQLNonNull(GraphQLString) },
-    arrivaltime: { type: new GraphQLNonNull(GraphQLString) },
+    departuretime: { type: new GraphQLNonNull(DateTimeType) },
+    arrivaltime: { type: new GraphQLNonNull(DateTimeType) },
     minprice: { type: new GraphQLNonNull(GraphQLFloat) },
     // optionaltext: null,
-    duration: { type: new GraphQLNonNull(GraphQLString) },
+    duration: { type: new GraphQLNonNull(DurationType) },
     changesno: { type: new GraphQLNonNull(GraphQLInt) },
     trainlist: {
       type: new GraphQLNonNull(new GraphQLList(new GraphQLNonNull(TrainType)))

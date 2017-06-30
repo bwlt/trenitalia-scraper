@@ -27,7 +27,7 @@ export default {
     limit: { type: GraphQLInt },
     offset: { type: GraphQLInt }
   },
-  resolve(source: mixed, args: Args, ctx: Ctx): Promise<SolutionObject[]> {
+  resolve(source: mixed, args: Args, ctx: Ctx) {
     const parameters = {};
     parameters.origin = args.origin;
     parameters.destination = args.destination;

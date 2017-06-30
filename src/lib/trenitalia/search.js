@@ -50,5 +50,19 @@ export default async ({
     response.headers.get("content-type") === "application/json",
     `Response content type must be set to 'application/json'`
   );
-  return await response.json();
+
+  const solutions = await response.json();
+
+  return solutions.map(s => {
+    const departuretime = moment(s.departuretime);
+    const arrivaltime = moment(s.arrivaltime);
+    const [dh, dm] = s.duration.split(":");
+    const duration = moment.duration({ h: dh, m: dm });
+    return {
+      ...s,
+      departuretime,
+      arrivaltime,
+      duration
+    };
+  });
 };
