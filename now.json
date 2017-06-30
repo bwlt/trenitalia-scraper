@@ -1,4 +1,5 @@
 {
+  "alias": "trenitalia-scraper",
   "env": {
     "NODE_ENV": "production"
   }

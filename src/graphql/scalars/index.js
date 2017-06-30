@@ -1,9 +1,8 @@
 // @flow
 
-import DateType from './date'
-import StationType from './station'
-
-export {
-  DateType,
-  StationType,
-}
+export { default as DateTimeType } from "./date-time";
+export { default as DateType } from "./date";
+export { default as DurationType } from "./duration";
+export { default as PriceType } from "./price";
+export { default as StationType } from "./station";
+export { default as TimeHourType } from "./time-hour";

@@ -1,19 +1,15 @@
-require('dotenv').load()
+require("dotenv").load();
 
+const { NODE_ENV } = process.env,
+  isProduction = NODE_ENV === "production";
 
-let app
-const port = process.env.PORT || 3000
+let app;
 
-
-if (process.env.NODE_ENV === 'production') {
-  app = require('../build').default
+if (isProduction) {
+  app = require("../build").default;
+} else {
+  require("babel-register");
+  app = require("../src").default;
 }
-else {
-  require('babel-register')
-  app = require('../src').default
-}
 
-
-app.listen(port, () => {
-  console.log(`🌍 Server started on: http://localhost:${port}`) // eslint-disable-line no-console
-})
+module.exports = app;
