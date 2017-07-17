@@ -1,57 +1,22 @@
 {
   "name": "trenitalia-scraper",
-  "version": "0.1.0",
-  "description": "",
-  "main": "src",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "devDependencies": {
-    "babel-eslint": "^7.2.3",
-    "babel-register": "^6.24.1",
-    "eslint": "^3.19.0",
-    "eslint-plugin-flowtype": "^2.34.0",
-    "express": "^4.15.3",
-    "flow-bin": "^0.47.0",
-    "husky": "^0.14.1",
-    "jest": "^20.0.4",
-    "lint-staged": "^4.0.0",
-    "nodemon": "^1.11.0",
-    "prettier": "^1.4.4",
-    "rimraf": "^2.6.1"
-  },
-  "dependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-env": "^1.5.2",
-    "body-parser": "^1.17.2",
-    "cheerio": "^1.0.0-rc.1",
-    "debug": "^2.6.8",
-    "dotenv": "^4.0.0",
-    "express-graphql": "^0.6.6",
-    "graphql": "^0.10.3",
-    "lodash": "^4.17.4",
-    "micro": "^7.3.3",
-    "micro-cors": "^0.0.4",
-    "moment": "^2.18.1",
-    "node-fetch": "^1.7.1",
-    "remove": "^0.1.5"
-  },
+  "version": "1.0.0",
+  "description": "A GraphQL interface to [trenitalia.com](http://www.trenitalia.com/) website solutions.",
+  "main": "index.js",
   "scripts": {
-    "build": "babel --out-dir build/ --copy-files src",
-    "clean": "rimraf build/ coverage/",
-    "precommit": "lint-staged",
-    "dev": "nodemon --exec \"micro\" bin/server.js",
-    "lint": "eslint .",
-    "start": "micro bin/server.js --port ${PORT:-3000}",
-    "test": "jest",
-    "test:watch": "yarn run test -- --watch"
-  }
+    "dev": "lerna run --parallel dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bwlt/trenitalia-scraper.git"
+  },
+  "keywords": [
+    "trenitalia"
+  ],
+  "author": "Walter Barbagallo <brb.walter@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bwlt/trenitalia-scraper/issues"
+  },
+  "homepage": "https://github.com/bwlt/trenitalia-scraper#readme"
 }

@@ -1,0 +1,6 @@
+{
+  "alias": "trenitalia-scraper-client",
+  "env": {
+    "REACT_APP_GRAPHQL_URL": "https://trenitalia-scraper.now.sh/"
+  }
+}
