@@ -4,7 +4,10 @@
   "description": "A GraphQL interface to [trenitalia.com](http://www.trenitalia.com/) website solutions.",
   "main": "index.js",
   "scripts": {
-    "dev": "lerna run --parallel dev"
+    "clean": "lerna clean",
+    "dev": "lerna run --parallel dev",
+    "postinstall": "lerna bootstrap",
+    "test": "lerna run test"
   },
   "repository": {
     "type": "git",
@@ -18,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/bwlt/trenitalia-scraper/issues"
   },
-  "homepage": "https://github.com/bwlt/trenitalia-scraper#readme"
+  "homepage": "https://github.com/bwlt/trenitalia-scraper#readme",
+  "dependencies": {
+    "lerna": "^2.0.0"
+  }
 }
