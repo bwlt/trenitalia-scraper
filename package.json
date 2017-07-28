@@ -1,6 +1,6 @@
 {
   "name": "trenitalia-scraper",
-  "version": "1.0.0",
+  "version": "0.2.1",
   "description": "A GraphQL interface to [trenitalia.com](http://www.trenitalia.com/) website solutions.",
   "main": "index.js",
   "scripts": {
