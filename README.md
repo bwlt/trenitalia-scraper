@@ -1,6 +1,7 @@
 # TRENITALIA SCRAPER
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/bwlt/trenitalia-scraper.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/bwlt/trenitalia-scraper.svg?branch=master)](https://travis-ci.org/bwlt/trenitalia-scraper)
 
 A GraphQL interface to [trenitalia.com](http://www.trenitalia.com/) website solutions.
 
