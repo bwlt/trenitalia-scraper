@@ -22,7 +22,7 @@
     "url": "https://github.com/bwlt/trenitalia-scraper/issues"
   },
   "homepage": "https://github.com/bwlt/trenitalia-scraper#readme",
-  "dependencies": {
+  "devDependencies": {
     "lerna": "^2.0.0"
   }
 }
