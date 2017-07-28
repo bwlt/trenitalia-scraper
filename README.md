@@ -1,5 +1,7 @@
 # TRENITALIA SCRAPER
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/bwlt/trenitalia-scraper.svg)](https://greenkeeper.io/)
+
 A GraphQL interface to [trenitalia.com](http://www.trenitalia.com/) website solutions.
 
 ---
