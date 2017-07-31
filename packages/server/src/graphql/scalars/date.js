@@ -7,7 +7,7 @@ const FORMAT = "DD-MM-YYYY";
 
 function dateValue(value: mixed): ?moment {
   if (typeof value !== "string") return undefined;
-  if (value.length !== 10) throw new Error("Invalid date format");
+  if (value.length !== 10) throw new Error(`Invalid date format. Expected '${FORMAT}'`);
   const m = moment(value, FORMAT);
   if (m.isValid()) return m;
   else return undefined;

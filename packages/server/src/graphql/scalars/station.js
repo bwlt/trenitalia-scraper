@@ -1,13 +1,13 @@
 // @flow
 
 import { GraphQLScalarType, Kind } from "graphql";
+import invariant from "invariant";
 
-import list from "../../lib/trenitalia/stations-list.json";
-import { invariant } from "../../utils";
+import { stations } from "../../lib/trenitalia";
 
 function getStationFromValue(value: mixed): ?string {
   if (typeof value !== "string") return undefined;
-  const station = list[value];
+  const station = stations.dataMap[value];
   if (station) return value;
   else return undefined;
 }

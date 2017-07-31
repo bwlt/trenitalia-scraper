@@ -5,8 +5,7 @@ const BASE_URL = "https://www.lefrecce.it";
 import querystring from "querystring";
 import moment from "moment";
 import fetch from "node-fetch";
-
-import invariant from "../../utils/invariant";
+import invariant from "invariant";
 
 export default async ({
   origin,

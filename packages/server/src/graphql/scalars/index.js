@@ -1,8 +1,8 @@
 // @flow
 
-export { default as DateTimeType } from "./date-time";
-export { default as DateType } from "./date";
-export { default as DurationType } from "./duration";
-export { default as PriceType } from "./price";
-export { default as StationType } from "./station";
-export { default as TimeHourType } from "./time-hour";
+export { default as DateTime } from "./date-time";
+export { default as Date     } from "./date";
+export { default as Duration } from "./duration";
+export { default as Price    } from "./price";
+export { default as Station  } from "./station";
+export { default as TimeHour } from "./time-hour";

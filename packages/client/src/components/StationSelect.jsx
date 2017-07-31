@@ -7,10 +7,7 @@ import Select from "./Select";
 
 const StationsQuery = gql`
   query {
-    stations {
-      id
-      name
-    }
+    stations
   }
 `;
 
@@ -18,9 +15,9 @@ export default compose(
   graphql(StationsQuery, {
     props: props => {
       return {
-        options: (props.data.stations || []).map(({ name }) => ({
-          label: name,
-          value: name
+        options: (props.data.stations || []).map((station) => ({
+          label: station,
+          value: station
         })),
         ...props.ownProps
       };
