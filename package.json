@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/bwlt/trenitalia-scraper#readme",
   "devDependencies": {
-    "lerna": "^2.0.0"
+    "lerna": "^3.0.0"
   }
 }
